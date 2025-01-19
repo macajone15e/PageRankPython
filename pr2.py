@@ -56,7 +56,7 @@ def calculPageRank(matrice,nbiteration):
             
     return pagerank
 
-def sortPageRank(pagerank, debug2=False):
+def showPageRank(pagerank):
     # Associer les indices et les valeurs dans une liste de tuples
     indices_et_pagerank = [(i + 1, pr) for i, pr in enumerate(pagerank)]
 
