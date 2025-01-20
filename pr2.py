@@ -102,7 +102,7 @@ matrice = chargeCSV("assets/test.csv")
 
 pagerank = calculPageRank(matrice,50)
 
-sortPageRank(pagerank)
+showPageRank(pagerank)
 
 
 
