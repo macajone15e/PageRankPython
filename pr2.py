@@ -4,18 +4,18 @@ import matplotlib.pyplot as plt
 debug = False
 debug2 = False
 
-
-def chargeCSV (CSV:str):
-    matrice = np.loadtxt(CSV, delimiter=";")  
+def loadCSV (CSV:str):
+    matrice = np.loadtxt(CSV, delimiter=";")
+       
     if debug:
         print("Matrice :")
         print(matrice)
     return matrice
 
 def calculPageRank(matrice,nbiteration):
+    
     #Obtention du nombre de ligne
-    nombre_lignes, nombre_colonnes = matrice.shape 
-
+    nombre_colonnes = matrice.shape[1]
 
     #Transposition de la matrice 
     transposee = matrice.T
@@ -37,7 +37,7 @@ def calculPageRank(matrice,nbiteration):
 
     #Création du vecteur 0.85 en fonction de la taille de la matrice
         
-    dumpingFactorVector = np.full(nombre_colonnes, 0.85)
+    dumpingFactorVector = np.full(nombre_colonnes, 0.85*(1/nombre_colonnes))
     pagerank = dumpingFactorVector.reshape(-1, 1)
     if debug == True :
         print("------- Vecteur Rempli de 0.85  --------")
@@ -48,7 +48,7 @@ def calculPageRank(matrice,nbiteration):
         pagerank = normalisee@pagerank
 
         #Ajout de 0.15/n à chaque case de la matrice
-        pagerank += 0.15/nombre_lignes
+        pagerank += 0.15/nombre_colonnes
 
     if debug2 :
         print("-------Pagerank--------")
@@ -98,11 +98,9 @@ def showPageRank(pagerank):
 
 
 
-matrice = chargeCSV("assets/test.csv")
+CSV = "assets/test.csv"
 
-pagerank = calculPageRank(matrice,50)
-
-showPageRank(pagerank)
+showPageRank(calculPageRank(loadCSV(CSV),50))
 
 
 
